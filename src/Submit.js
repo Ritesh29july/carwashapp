@@ -26,6 +26,7 @@ class Submit extends Component {
   }	
 
 	submitRecipe() {
+
 		console.log('button clicked');
 		console.log('this.name.value'+this.name.value);
 		console.log('this.name.value'+this.address.value);
@@ -33,7 +34,9 @@ class Submit extends Component {
 
 		console.log('this.name.value'+this.mobile.value);
 		console.log('this.name.value'+this.description.value);
-		console.log('DOJ'+this.target.DOJ.value);
+		console.log('washNOw '+this.washnow.value);
+		console.log('ScheduleDate'+this.ScheduleDate.value);
+		
 		// Simple POST request with a JSON body using fetch
         const requestOptions = {
             method: 'POST',
@@ -42,7 +45,7 @@ class Submit extends Component {
 		    address: this.address.value,
 		    carPlateNumber: this.plateNumber.value,
 		    contactNumber: this.mobile.value,
-		    scheduleDate: '',
+		    scheduleDate: this.ScheduleDate.value,
 		    description: this.description.value	 })
         };
         fetch('http://localhost:8080/booking', requestOptions)
@@ -58,8 +61,7 @@ class Submit extends Component {
 		return (
 			<div className="row">
 				<div className="col-xs-5 col-sm-5">
-					<h1>Submit</h1>
-					<form>
+				<form>
 					  <div className="form-group">
 					    <label htmlFor="name">Name</label>
 					    <input type="text" 
@@ -93,32 +95,36 @@ class Submit extends Component {
 					    				id="mobile" 
 					    				placeholder="Enter the Mobile Number" />
 					  </div>
-					<div className="form-group">
-					    <label htmlFor="mobile">Wash Now</label>
-					    <input type="text" 
-					    				ref={(input) => {this.washnow = input;}}
-					    				className="form-control" 
-					    				id="washnow" 
-					    				placeholder="Enter the washnow" />
-					  </div>
-					{/*Date picker*/}
-					  <div className="form-group">
-					    <label htmlFor="mobile">Wash Now</label>
-					    <DatePicker selected={this.state.date}
+					{
+						/* start Commented 
+									<div className="form-group">
+								    <label htmlFor="mobile">Wash Now</label>
+								    <input type="text" 
+								    				ref={(input) => {this.washnow = input;}}
+								    				className="form-control" 
+								    				id="washnow" 
+								    				placeholder="Enter the washnow" />
+								  </div>
+								  <div className="form-group">
+								    <label htmlFor="mobile">Wash Now</label>
+								    <DatePicker selected={this.state.date}
 
-                  	  onChange={this.dateChanged} />
-       				 <input type="button" onClick={this.clear} value="Clear"/>
-					  </div>
+			                  	  onChange={this.dateChanged} />
+			       				 <input type="button" onClick={this.clear} value="Clear"/>
+								  </div>
+					  End Commented */
+					}
 
 
 
-<Form.Group controlId="DOJ">
-              <Form.Label>DOJ</Form.Label>
+			<Form.Group controlId="ScheduleDate">
+              <Form.Label>ScheduleDate</Form.Label>
               <Form.Control
+              ref={(input) => {this.ScheduleDate = input;}}
                 type="date"
-                name="DOJ"
+                name="ScheduleDate"
                 required
-                placeholder="DOJ"
+                placeholder="ScheduleDate"
                />
               </Form.Group>
 
